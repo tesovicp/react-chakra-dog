@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { Cats } from "./pages/Cats/Cats";
@@ -12,7 +12,7 @@ import appconfig from "./common/appConfig";
 const store = appconfig.debug ? createStore(mainReducer, applyMiddleware(thunk, logger)) : createStore(mainReducer, applyMiddleware(thunk));
 
 export const App = () => <Provider store={store}>
-    <Router>
+    <HashRouter>
         <Switch>
             <Route exact path="/">
                 <Home />
@@ -24,5 +24,5 @@ export const App = () => <Provider store={store}>
                 <Dogs />
             </Route>
         </Switch>
-    </Router>
+    </HashRouter>
 </Provider>;

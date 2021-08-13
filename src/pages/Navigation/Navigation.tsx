@@ -20,10 +20,10 @@ export const Navigation = () => {
             <MenuItem as="a" href="/">
                 <ItemText title="Home" path="/" locationPath={location.pathname} />
             </MenuItem>
-            <MenuItem as="a" href="/cats">
+            <MenuItem as="a" href="/#/cats">
                 <ItemText title="Cats" path="/cats" locationPath={location.pathname} />
             </MenuItem>
-            <MenuItem as="a" href="/dogs">
+            <MenuItem as="a" href="/#/dogs">
                 <ItemText title="Dogs" path="/dogs" locationPath={location.pathname} />
             </MenuItem>
         </MenuList>
