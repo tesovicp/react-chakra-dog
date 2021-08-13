@@ -1,11 +1,11 @@
 import React from "react";
-import { Avatar, Center, Heading, Wrap, WrapItem } from "@chakra-ui/react";
+import { Avatar, Center, Heading, Spinner, Wrap, WrapItem } from "@chakra-ui/react";
 import { useCatsList } from "./hooks/useCatsList";
 import { Navigation } from "../Navigation/Navigation";
 import "./Cats.css";
 
 export const Cats = () => {
-    const { catsList, getCats } = useCatsList();
+    const { isLoading, catsList, getCats } = useCatsList();
 
     React.useEffect(() => {
         getCats();
@@ -15,7 +15,17 @@ export const Cats = () => {
         <Navigation />
         <Heading>Cats</Heading>
 
-        <Center>
+        {isLoading && <Center>
+            <Spinner
+                thickness="5px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="blue.500"
+                size="xl"
+            />
+        </Center>}
+
+        {!isLoading && <Center>
             <div className="dogs-wrap">
                 <Wrap>
                     {catsList.map((cat, i) => (
@@ -25,6 +35,6 @@ export const Cats = () => {
                     ))}
                 </Wrap>
             </div>
-        </Center>
+        </Center>}
     </div>;
 };

@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import appconfig from "../../../common/appConfig";
-import { getCatsList } from "../catsSlice";
+import { setLoading, getCatsList } from "../catsSlice";
 
 export const getCatsApi: { (dispatch: any): Promise<void> } = async (dispatch: any) => {
     const config: AxiosRequestConfig = {
@@ -8,7 +8,9 @@ export const getCatsApi: { (dispatch: any): Promise<void> } = async (dispatch: a
         headers: { "x-api-key": "d7d3b8c8-b30d-450a-af30-6de865be665a" }
     };
 
-    axios.get(`v1/images/search?limit=20&format=json`, config)
+    dispatch(setLoading(undefined));
+
+    axios.get(`v1/images/search?limit=20`, config)
         .then(response => {
             console.log("!!! API - getCats !!!");
 
