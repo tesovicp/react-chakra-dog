@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { Cats } from "./pages/Cats/Cats";
 import { Dogs } from "./pages/Dogs/Dogs";
+import { DogsC } from "./pages/DogsContext/DogsC";
 import { Home } from "./pages/Home/Home";
 import { mainReducer } from "./common/main.reducer";
 import appconfig from "./common/appConfig";
@@ -22,6 +23,9 @@ export const App = () => <Provider store={store}>
             </Route>
             <Route path="/dogs">
                 <Dogs />
+            </Route>
+            <Route path="/dogsContext">
+                <DogsC />
             </Route>
         </Switch>
     </HashRouter>

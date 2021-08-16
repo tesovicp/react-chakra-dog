@@ -26,6 +26,9 @@ export const Navigation = () => {
             <MenuItem as="a" href="/#/dogs">
                 <ItemText title="Dogs" path="/dogs" locationPath={location.pathname} />
             </MenuItem>
+            <MenuItem as="a" href="/#/dogsContext">
+                <ItemText title="Dogs - Context" path="/dogsContext" locationPath={location.pathname} />
+            </MenuItem>
         </MenuList>
     </Menu>;
 };
