@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Center, Heading, ScaleFade, Wrap, WrapItem, Image, Box } from "@chakra-ui/react";
+import { Avatar, Center, Heading, ScaleFade, Wrap, WrapItem, Image, Box, Modal, useDisclosure, ModalOverlay, ModalContent, Text, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button } from "@chakra-ui/react";
 import { Navigation } from "../Navigation/Navigation";
 import { useDogsContext } from "./dogsContext";
 import { getDogsContextApi } from "./api/getDogsContextApi";
@@ -8,26 +8,28 @@ import "./DogsC.css";
 export const DogsC = () => {
     const { state: dogState, dispatch: dogDispatch } = useDogsContext();
 
+    const { isOpen, onClose, onToggle } = useDisclosure();
+
     React.useEffect(() => {
         getDogsContextApi(dogDispatch);
     }, []);
 
     // const dogClick = (dogId: string) => {
-    //     if (dogDispatch) {
-    //         dogDispatch({ type: "removeDog", dogId });
-    //     }
+    //     dogDispatch({ type: "removeDog", dogId });
     // }
 
     const makeBig = (dogId: string) => {
-        if (dogDispatch) {
-            dogDispatch({ type: "makeBig", dogId })
-        }
+        dogDispatch({ type: "makeBig", dogId });
     }
 
     const select = (dogId?: string) => {
-        if (dogDispatch) {
-            dogDispatch({ type: "select", dogId: dogId || "" })
-        }
+        dogDispatch({ type: "select", dogId: dogId || "" });
+        onToggle();
+    }
+
+    const close = () => {
+        onToggle();
+        select(undefined);
     }
 
     return <div style={{ padding: 20 }}>
@@ -37,7 +39,7 @@ export const DogsC = () => {
         <Center>
             <div className="dogs-wrap">
                 <Wrap>
-                    {dogState && !dogState.selected && dogState.dogsURLList.map((dog, i) => (
+                    {dogState.dogsURLList.map((dog, i) => (
                         <WrapItem key={dog}>
                             <Center w="120px" h="120px">
                                 <ScaleFade initialScale={0.2} in={true}>
@@ -54,7 +56,7 @@ export const DogsC = () => {
                             </Center>
                         </WrapItem>
                     ))}
-                    {dogState && dogState.selected &&
+                    {false && dogState.selected &&
                         <Center w="800px" h="400px">
                             <Box boxSize="400px" d="flex" alignItems="center" isTruncated>
                                 <Image
@@ -66,6 +68,31 @@ export const DogsC = () => {
                             </Box>
                         </Center>
                     }
+                    <Modal onClose={onClose} isOpen={isOpen} trapFocus isCentered>
+                        <ModalOverlay />
+                        <ModalContent>
+                            <ModalHeader>Selected Dog</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+                                <Center>
+                                    <Image
+                                        className="pointer"
+                                        name={dogState.selected}
+                                        onClick={() => select(dogState.selected)}
+                                        src={dogState.selected}
+                                    />
+                                </Center>
+                                <Text fontSize="xs" color="gray.400">{dogState.selected}</Text>
+                            </ModalBody>
+
+                            <ModalFooter>
+                                {/* <Button variant="ghost" mr={3}>Secondary Action</Button> */}
+                                <Button colorScheme="blue" onClick={close} autoFocus>
+                                    Close
+                                </Button>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
                 </Wrap>
             </div>
         </Center>

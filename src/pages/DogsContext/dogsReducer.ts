@@ -11,8 +11,6 @@ export type DogsActions =
     | { type: "select", dogId: string }
 
 export const dogsReducer = (state: DogsState, action: DogsActions) => {
-    // console.log(state);
-
     switch (action.type) {
         case "getDogs": {
             return { ...state, dogsURLList: action.dogsURLList }

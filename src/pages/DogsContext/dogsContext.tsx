@@ -7,16 +7,23 @@ import { DogsActions, dogsReducer, DogsState } from "./dogsReducer";
 const initialState: DogsState = {
     dogsURLList: [],
     big: [],
-    selected: undefined
+    selected: undefined,
 }
 
 type Dispatch = (action: DogsActions) => void;
 
-const DogsContext = React.createContext<{ state: DogsState | undefined, dispatch: Dispatch | undefined }>({ state: undefined, dispatch: undefined });
+const initialContext = {
+    state: initialState,
+    dispatch: () => { },
+}
+
+const DogsContext = React.createContext<{ state: DogsState, dispatch: Dispatch }>(initialContext);
 
 export const DogsProvider = ({ children }: { children: ReactNode }) => {
     debug(() => console.group("Action"));
+
     const [state, dispatch] = useReducer(appconfig.debug ? logger(dogsReducer) : dogsReducer, initialState);
+
     debug(() => console.groupEnd());
 
     const contextValue = { state, dispatch };
