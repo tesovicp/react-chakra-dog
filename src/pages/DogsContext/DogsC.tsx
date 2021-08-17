@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Center, Heading, Wrap, WrapItem } from "@chakra-ui/react";
+import { Avatar, Center, Heading, ScaleFade, Wrap, WrapItem } from "@chakra-ui/react";
 import { Navigation } from "../Navigation/Navigation";
 import { useDogsContext } from "./dogsContext";
 import { getDogsContextApi } from "./api/getDogsContextApi";
@@ -27,13 +27,15 @@ export const DogsC = () => {
                 <Wrap>
                     {dogState && dogState.dogsURLList.map((dog, i) => (
                         <WrapItem key={dog}>
-                            <Avatar
-                                className="dog"
-                                name={i.toString()}
-                                onClick={() => dogClick(dog)}
-                                size="2xl"
-                                src={dog}
-                            />
+                            <ScaleFade initialScale={0.5} in={dogState.dogsURLList.indexOf(dog) >= 0}>
+                                <Avatar
+                                    className="dog"
+                                    name={i.toString()}
+                                    onClick={() => dogClick(dog)}
+                                    size="2xl"
+                                    src={dog}
+                                />
+                            </ScaleFade>
                         </WrapItem>
                     ))}
                 </Wrap>
