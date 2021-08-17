@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import appconfig from "../../../common/appConfig";
+import { debug } from "../../../common/helpers";
 
 export const getDogsContextApi: { (dispatch: any): Promise<void> } = async (dispatch: any) => {
     const config: AxiosRequestConfig = {
@@ -8,7 +9,7 @@ export const getDogsContextApi: { (dispatch: any): Promise<void> } = async (disp
 
     axios.get(`breeds/image/random/20`, config)
         .then(response => {
-            console.log("!!! API - getDogsContext !!!");
+            debug(() => console.log("!!! API - getDogsContext !!!"));
             if (response.status === 200) {
                 dispatch({ type: "getDogs", dogsURLList: response.data.message });
             }

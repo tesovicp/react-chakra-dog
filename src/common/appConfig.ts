@@ -1,4 +1,4 @@
-const IS_DEBUG: boolean = true;
+const IS_DEBUG: boolean = false;
 
 interface IAppConfig {
     BASE_URL_CATS: string;
