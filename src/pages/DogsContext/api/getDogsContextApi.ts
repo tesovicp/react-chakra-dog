@@ -7,7 +7,7 @@ export const getDogsContextApi: { (dispatch: any): Promise<void> } = async (disp
         baseURL: appconfig.BASE_URL_DOGS,
     };
 
-    axios.get(`breeds/image/random/20`, config)
+    axios.get(`breeds/image/random/24`, config)
         .then(response => {
             debug(() => console.log("!!! API - getDogsContext !!!"));
             if (response.status === 200) {

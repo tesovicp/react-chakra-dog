@@ -27,9 +27,9 @@ export const Navigation = () => {
 
     return <HStack spacing="auto">
         <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>Pages</MenuButton>
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>{getTitle(location.pathname)}</MenuButton>
             <MenuList>
-                <MenuItem as="a" href="/">
+                <MenuItem as="a" href="/#/">
                     <ItemText title={getTitle("/")} path="/" locationPath={location.pathname} />
                 </MenuItem>
                 <MenuItem as="a" href="/#/cats">

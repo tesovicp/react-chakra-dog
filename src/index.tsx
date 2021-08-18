@@ -1,17 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { App } from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
-import { DogsProvider } from "./pages/DogsContext/dogsContext";
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
-      <DogsProvider>
-        <App />
-      </DogsProvider>
+      <App />
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")
