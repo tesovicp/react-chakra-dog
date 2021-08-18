@@ -28,7 +28,7 @@ export const dogsReducer = (state: DogsState, action: DogsActions) => {
         }
         case "select": {
             if (state.selected !== action.dogId) {
-                return { ...state, selected: action.dogId }
+                return { ...state, selected: action.dogId, big: [] }
             } else {
                 return { ...state, selected: undefined, big: [] }
             }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Center, Heading, Wrap, WrapItem } from "@chakra-ui/react";
+import { Avatar, Center, Stack, Wrap, WrapItem } from "@chakra-ui/react";
 import { useDogsList } from "./hooks/useDogsList";
 import { Navigation } from "../Navigation/Navigation";
 import "./Dogs.css";
@@ -11,9 +11,8 @@ export const Dogs = () => {
         getDogs();
     }, []);
 
-    return <div style={{ padding: 20 }}>
+    return <Stack p="0 15px">
         <Navigation />
-        <Heading>Dogs</Heading>
 
         <Center>
             <div className="dogs-wrap">
@@ -26,5 +25,5 @@ export const Dogs = () => {
                 </Wrap>
             </div>
         </Center>
-    </div>;
+    </Stack>;
 };

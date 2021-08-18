@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Center, Heading, Spinner, Wrap, WrapItem } from "@chakra-ui/react";
+import { Avatar, Center, Spinner, Stack, Wrap, WrapItem } from "@chakra-ui/react";
 import { useCatsList } from "./hooks/useCatsList";
 import { Navigation } from "../Navigation/Navigation";
 import "./Cats.css";
@@ -11,9 +11,8 @@ export const Cats = () => {
         getCats();
     }, []);
 
-    return <div style={{ padding: 20 }}>
+    return <Stack p="0 15px">
         <Navigation />
-        <Heading>Cats</Heading>
 
         {isLoading && <Center>
             <Spinner
@@ -36,5 +35,5 @@ export const Cats = () => {
                 </Wrap>
             </div>
         </Center>}
-    </div>;
+    </Stack>;
 };

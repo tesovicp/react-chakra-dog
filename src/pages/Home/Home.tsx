@@ -1,9 +1,8 @@
-import { Heading } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import { Navigation } from "../Navigation/Navigation";
 
 export const Home = () => {
-    return <div style={{ padding: 20 }}>
+    return <Stack p="0 15px">
         <Navigation />
-        <Heading>Home</Heading>
-    </div>;
+    </Stack>
 };
