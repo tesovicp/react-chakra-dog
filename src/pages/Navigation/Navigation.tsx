@@ -8,14 +8,20 @@ interface IItemText {
     locationPath: string;
 }
 
-const getTitle = (value: string) => {
-    switch (value) {
-        case "/": return "Home"
-        case "/cats": return "Cats"
-        case "/dogs": return "Dogs"
-        case "/dogsContext": return "Dogs - Context"
-        default: throw new Error("Error")
-    }
+interface ITitle {
+    [key: string]: string
+}
+
+const title: ITitle = {
+    home: "Home",
+    cats: "Cats",
+    dogs: "Dogs",
+    dogsContext: "Dogs - Context",
+}
+
+const getTitle = (pathname: string) => {
+    const value = pathname.replace("/", "");
+    return title[value] || "ERROR";
 }
 
 const ItemText = ({ title, path, locationPath }: IItemText) =>
@@ -30,16 +36,16 @@ export const Navigation = () => {
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>{getTitle(location.pathname)}</MenuButton>
             <MenuList>
                 <MenuItem as="a" href="/#/">
-                    <ItemText title={getTitle("/")} path="/" locationPath={location.pathname} />
+                    <ItemText title={getTitle("home")} path="/" locationPath={location.pathname} />
                 </MenuItem>
                 <MenuItem as="a" href="/#/cats">
-                    <ItemText title={getTitle("/cats")} path="/cats" locationPath={location.pathname} />
+                    <ItemText title={getTitle("cats")} path="/cats" locationPath={location.pathname} />
                 </MenuItem>
                 <MenuItem as="a" href="/#/dogs">
-                    <ItemText title={getTitle("/dogs")} path="/dogs" locationPath={location.pathname} />
+                    <ItemText title={getTitle("dogs")} path="/dogs" locationPath={"/#/dogs"} />
                 </MenuItem>
                 <MenuItem as="a" href="/#/dogsContext">
-                    <ItemText title={getTitle("/dogsContext")} path="/dogsContext" locationPath={location.pathname} />
+                    <ItemText title={getTitle("dogsContext")} path="/dogsContext" locationPath={location.pathname} />
                 </MenuItem>
             </MenuList>
         </Menu>
