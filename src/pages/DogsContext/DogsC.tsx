@@ -35,6 +35,10 @@ export const DogsC = () => {
         select(undefined);
     }
 
+    const change = (change: "previous" | "next") => {
+        dogDispatch({ type: change });
+    }
+
     return <Stack p="0 15px">
         <Navigation />
 
@@ -64,10 +68,10 @@ export const DogsC = () => {
             </Center>
         }
 
-        <Modal onClose={onClose} isOpen={isOpen} trapFocus isCentered>
+        <Modal onClose={onClose} isOpen={isOpen} isCentered>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>Selected Dog</ModalHeader>
+                <ModalHeader>{`Viewing (${dogState.dogsURLList.indexOf(dogState.selected || "") + 1}/${dogState.dogsURLList.length})`}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                     <Center>
@@ -82,10 +86,9 @@ export const DogsC = () => {
                 </ModalBody>
 
                 <ModalFooter>
-                    {/* <Button variant="ghost" mr={3}>Secondary Action</Button> */}
-                    <Button colorScheme="blue" onClick={close} autoFocus>
-                        Close
-                    </Button>
+                    <Button variant="ghost" mr={3} disabled={!dogState.selected} onClick={() => change("previous")}>Previous</Button>
+                    <Button variant="ghost" mr={3} disabled={!dogState.selected} onClick={() => change("next")}>Next</Button>
+                    <Button colorScheme="blue" onClick={close} autoFocus>Close</Button>
                 </ModalFooter>
             </ModalContent>
         </Modal>

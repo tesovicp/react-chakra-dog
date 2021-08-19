@@ -9,6 +9,8 @@ export type DogsActions =
     | { type: "makeBig", dogId: string }
     | { type: "removeDog", dogId: string }
     | { type: "select", dogId: string }
+    | { type: "previous" }
+    | { type: "next" }
 
 export const dogsReducer = (state: DogsState, action: DogsActions) => {
     switch (action.type) {
@@ -32,6 +34,16 @@ export const dogsReducer = (state: DogsState, action: DogsActions) => {
             } else {
                 return { ...state, selected: undefined, big: [] }
             }
+        }
+        case "previous": {
+            const prevIndex = state.dogsURLList.indexOf(state.selected || "") - 1;
+            const prev = state.dogsURLList[prevIndex <= 0 ? state.dogsURLList.length - 1 : prevIndex];
+            return { ...state, selected: prev }
+        }
+        case "next": {
+            const nextIndex = state.dogsURLList.indexOf(state.selected || "") + 1;
+            const next = state.dogsURLList[nextIndex > state.dogsURLList.length - 1 ? 0 : nextIndex];
+            return { ...state, selected: next }
         }
         default: {
             // throw new Error(`Unhandled action: ${action.type}`);
