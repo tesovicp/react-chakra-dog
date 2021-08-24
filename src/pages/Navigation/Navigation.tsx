@@ -20,7 +20,7 @@ const title: ITitle = {
 }
 
 const getTitle = (pathname: string) => {
-    const value = pathname.replace("/", "");
+    const value = pathname === "/" ? "home" : pathname.replace("/", "");
     return title[value] || "ERROR";
 }
 
